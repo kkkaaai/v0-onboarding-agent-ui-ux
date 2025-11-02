@@ -110,8 +110,8 @@ export function HROnboardingDashboard() {
 
               {submitted ? (
                 <div className="space-y-5 text-center py-8">
-                  <div className="inline-flex items-center justify-center w-20 h-20 bg-accent rounded-full shadow-lg">
-                    <CheckCircle2 className="w-10 h-10 text-accent-foreground" />
+                  <div className="inline-flex items-center justify-center w-20 h-20 bg-primary rounded-full shadow-lg">
+                    <CheckCircle2 className="w-10 h-10 text-white" />
                   </div>
                   <h3 className="text-xl font-semibold text-foreground">Employee Created!</h3>
                   <p className="text-muted-foreground">{submitted.name} has been added to the system</p>
@@ -217,9 +217,9 @@ export function HROnboardingDashboard() {
                     </Select>
                   </div>
 
-                  <Button
-                    type="submit"
-                    className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-6 text-base"
+                <Button
+                  type="submit"
+                  className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-6 text-base"
                   >
                     Create Employee Profile
                   </Button>
@@ -233,8 +233,8 @@ export function HROnboardingDashboard() {
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-bold text-foreground">Recent Employees</h2>
-                <div className="px-4 py-2 bg-accent/10 border border-accent/20 rounded-lg">
-                  <span className="text-sm font-semibold text-accent">{employees.length} Total</span>
+                <div className="px-4 py-2 bg-primary/10 border border-primary/20 rounded-lg">
+                  <span className="text-sm font-semibold text-primary">{employees.length} Total</span>
                 </div>
               </div>
 
@@ -263,9 +263,9 @@ export function HROnboardingDashboard() {
                             <p className="text-sm text-muted-foreground mt-1">{employee.email}</p>
                           </div>
                         </div>
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full flex-shrink-0">
-                          <CheckCircle2 className="w-4 h-4 text-accent" />
-                          <span className="text-sm font-semibold text-accent">Active</span>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full flex-shrink-0">
+                      <CheckCircle2 className="w-4 h-4 text-primary" />
+                      <span className="text-sm font-semibold text-primary">Active</span>
                         </div>
                       </div>
 
@@ -284,7 +284,7 @@ export function HROnboardingDashboard() {
                         </div>
                         <div>
                           <p className="text-xs text-muted-foreground uppercase font-semibold mb-1.5">Status</p>
-                          <p className="text-accent font-semibold">✓ Onboarded</p>
+                          <p className="text-primary font-semibold">✓ Onboarded</p>
                         </div>
                       </div>
 
