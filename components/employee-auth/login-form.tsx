@@ -4,10 +4,10 @@ import type React from "react"
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { LogIn, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 interface LoginFormProps {
   onLogin: (userData: any) => void
@@ -64,95 +64,91 @@ export function LoginForm({ onLogin, onAdminAccess }: LoginFormProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-muted flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md lg:max-w-lg">
-        <Card className="p-8 lg:p-10 shadow-2xl">
-          {/* Header */}
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 bg-primary rounded-xl mb-6 shadow-lg">
-              <LogIn className="w-8 h-8 lg:w-10 lg:h-10 text-primary-foreground" />
-            </div>
-            <h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-3">Welcome Back</h1>
-            <p className="text-base lg:text-lg text-muted-foreground">Access your employee portal</p>
-          </div>
-
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email */}
-            <div className="space-y-3">
-              <Label htmlFor="email" className="text-foreground font-semibold text-base">
-                Email Address
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="john@company.com"
-                className="bg-input border-border h-12 text-base"
-              />
-            </div>
-
-            {/* Password */}
-            <div className="space-y-3">
-              <Label htmlFor="password" className="text-foreground font-semibold text-base">
-                Password
-              </Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                className="bg-input border-border h-12 text-base"
-              />
-            </div>
-
-            {/* Error Message */}
-            {error && (
-              <div className="p-4 bg-destructive/10 border border-destructive rounded-lg text-destructive text-sm font-medium">
-                {error}
+    <div className="min-h-screen bg-transparent flex items-center justify-center px-4 py-12">
+      <div className="w-full max-w-[400px] space-y-6">
+        <Card className="border border-primary/10 bg-white/80 backdrop-blur rounded-[24px]">
+          <CardHeader className="space-y-3 text-center">
+            <CardTitle className="text-3xl font-semibold text-foreground">Welcome back</CardTitle>
+            <CardDescription className="text-base text-muted-foreground">
+              Sign in to continue your onboarding journey.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-3">
+                <Label htmlFor="email" className="text-sm font-semibold text-foreground">
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="john@company.com"
+                  className="h-12 rounded-xl border-primary/10 bg-white/70 focus-visible:ring-primary/30"
+                />
               </div>
-            )}
 
-            {/* Submit Button */}
-            <Button
-              type="submit"
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-7 text-base lg:text-lg flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all"
-            >
-              Sign In
-              <ArrowRight className="w-5 h-5" />
-            </Button>
-          </form>
+              <div className="space-y-3">
+                <Label htmlFor="password" className="text-sm font-semibold text-foreground">
+                  Password
+                </Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  className="h-12 rounded-xl border-primary/10 bg-white/70 focus-visible:ring-primary/30"
+                />
+              </div>
 
-          {/* Admin Access */}
-          <div className="mt-8 pt-6 text-center">
-            <p className="text-sm text-muted-foreground mb-4">Are you an HR admin?</p>
+              {error && (
+                <div className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm font-medium text-destructive">
+                  {error}
+                </div>
+              )}
+
+              <Button
+                type="submit"
+                className="w-full h-12 rounded-xl bg-primary text-primary-foreground font-semibold shadow-none transition hover:bg-primary/90"
+              >
+                Sign In
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </form>
+          </CardContent>
+          <CardFooter className="flex flex-col gap-3 text-center">
+            <p className="text-sm text-muted-foreground">Are you an HR admin?</p>
             <Button
               type="button"
               onClick={handleAdminClick}
               variant="outline"
-              className="w-full border-border text-primary hover:bg-primary/5 bg-transparent h-12 font-semibold"
+              className="h-11 w-full rounded-xl border-primary/20 text-primary hover:bg-primary/10"
             >
-              Admin Dashboard
+              Go to admin dashboard
             </Button>
-          </div>
+          </CardFooter>
         </Card>
 
-        {/* Demo Credentials */}
-        <div className="mt-6 p-5 lg:p-6 bg-card rounded-lg shadow-lg">
-          <p className="text-sm text-muted-foreground font-bold mb-3">📋 Demo Credentials:</p>
-          <div className="space-y-2">
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-muted-foreground font-semibold">Email:</span>
-              <code className="text-xs text-foreground bg-muted px-2 py-1 rounded">john@company.com</code>
+        <Card className="rounded-[24px] border-none bg-primary/10 text-primary">
+          <CardHeader className="space-y-2">
+            <CardTitle className="text-base font-semibold text-primary/90">Demo credentials</CardTitle>
+            <CardDescription className="text-sm text-primary/70">
+              Use these details while testing the portal.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-2 text-sm">
+            <div className="flex items-center justify-between rounded-lg bg-white/60 px-3 py-2">
+              <span className="font-medium">Email</span>
+              <code className="rounded bg-white px-2 py-1 text-xs text-primary">john@company.com</code>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-muted-foreground font-semibold">Password:</span>
-              <code className="text-xs text-foreground bg-muted px-2 py-1 rounded">12345</code>
+            <div className="flex items-center justify-between rounded-lg bg-white/60 px-3 py-2">
+              <span className="font-medium">Password</span>
+              <code className="rounded bg-white px-2 py-1 text-xs text-primary">12345</code>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )

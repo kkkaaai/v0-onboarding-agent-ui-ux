@@ -24,18 +24,34 @@ export function AnamAvatarChatbot({
 
   useEffect(() => {
     initAnamChatbot()
-    
+
     return () => {
-      // Cleanup on unmount
       if (anamClient) {
-        try {
-          anamClient.stopStreaming()
-        } catch (e) {
-          console.log('Cleanup error:', e)
-        }
+        teardownClient(anamClient)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const teardownClient = async (client: any) => {
+    try {
+      await client.stopStreaming()
+    } catch (error) {
+      console.error('Anam stop error:', error)
+    }
+
+    try {
+      client.removeAllListeners?.()
+    } catch (error) {
+      console.error('Anam remove listeners error:', error)
+    }
+
+    try {
+      client.destroy?.()
+    } catch (error) {
+      console.error('Anam destroy error:', error)
+    }
+  }
 
   const initAnamChatbot = async () => {
     try {
@@ -45,6 +61,11 @@ export function AnamAvatarChatbot({
       setStatus('connecting')
       setStatusText('Connecting to AI assistant...')
       setShowMicToast(true)
+
+      if (anamClient) {
+        await teardownClient(anamClient)
+        setAnamClient(null)
+      }
 
       // Create session token with persona configuration
       const sessionToken = await createSessionToken()
@@ -304,16 +325,15 @@ Use the knowledge folder for detailed company information.`,
   }
 
   const handleStop = async () => {
-    if (anamClient) {
-      try {
-        await anamClient.stopStreaming()
-        setStatus('stopped')
-        setStatusText('Conversation stopped')
-        setAnamClient(null)
-      } catch (error) {
-        console.error('Error stopping:', error)
-      }
+    if (!anamClient) {
+      return
     }
+
+    await teardownClient(anamClient)
+    setAnamClient(null)
+    setStatus('stopped')
+    setStatusText('Conversation stopped')
+    setShowMicToast(false)
   }
 
   

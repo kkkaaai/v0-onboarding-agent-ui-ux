@@ -9,7 +9,7 @@ export default function Home() {
 
   if (userRole === "admin") {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-background to-muted">
+      <main className="min-h-screen bg-transparent">
         <HROnboardingDashboard />
       </main>
     )

@@ -1,9 +1,10 @@
 "use client"
 
+import { useState, useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Briefcase, Building2, FileText } from "lucide-react"
-import { OnboardingChecklist } from "./onboarding-checklist"
+import { OnboardingChecklist, type ChecklistItem } from "./onboarding-checklist"
 import { IntegrationsPanel } from "./integrations-panel"
 import { TextChatbot } from "./text-chatbot"
 import { AnamAvatarChatbot } from "./anam-avatar-chatbot"
@@ -23,8 +24,28 @@ interface EmployeeDashboardProps {
 }
 
 export function EmployeeDashboard({ user, onLogout }: EmployeeDashboardProps) {
+  const [checklistItems, setChecklistItems] = useState<ChecklistItem[]>([
+    { id: "1", title: "Complete Profile Setup", description: "Update your personal information", completed: true },
+    { id: "2", title: "Review Company Handbook", description: "Read and acknowledge our policies", completed: true },
+    { id: "3", title: "Join Slack Workspace", description: "Connect with your team on Slack", completed: false },
+    { id: "4", title: "Access Aurora Design System", description: "Review design tokens and components", completed: false },
+    { id: "5", title: "Set Up Work Equipment", description: "Configure your laptop and tools", completed: false },
+    { id: "6", title: "Attend Team Meeting", description: "Join your team's introduction session", completed: false },
+    { id: "7", title: "Complete Training Modules", description: "Finish all mandatory training", completed: false },
+  ])
+
+  const handleToggleChecklist = (id: string) => {
+    setChecklistItems((prev) => prev.map((item) => (item.id === id ? { ...item, completed: !item.completed } : item)))
+  }
+
+  const progress = useMemo(() => {
+    const completedCount = checklistItems.filter((item) => item.completed).length
+    const totalCount = checklistItems.length
+    const percentage = Math.round((completedCount / totalCount) * 100)
+    return { percentage, completedCount, totalCount }
+  }, [checklistItems])
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-muted">
+    <div className="min-h-screen bg-transparent">
       {/* Pill Top Navigation matching Figma */}
       <TopNav
         user={user}
@@ -84,15 +105,15 @@ export function EmployeeDashboard({ user, onLogout }: EmployeeDashboardProps) {
               <div className="mt-5 rounded-[18px] bg-primary/10 p-4">
                 <div className="flex items-center justify-between text-sm font-semibold text-primary">
                   <span>Onboarding Progress</span>
-                  <span>29% · 2 of 7</span>
+                  <span>{progress.percentage}% · {progress.completedCount} of {progress.totalCount}</span>
                 </div>
                 <div className="mt-3 h-2 w-full rounded-full bg-primary/20">
-                  <div className="h-2 rounded-full bg-primary" style={{ width: "29%" }} />
+                  <div className="h-2 rounded-full bg-primary" style={{ width: `${progress.percentage}%` }} />
                 </div>
               </div>
             </Card>
 
-            <OnboardingChecklist />
+            <OnboardingChecklist items={checklistItems} onToggle={handleToggleChecklist} />
 
             <IntegrationsPanel />
 
@@ -103,7 +124,7 @@ export function EmployeeDashboard({ user, onLogout }: EmployeeDashboardProps) {
                 Important Documents
               </h3>
 
-              <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-[10px]">
+              <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-[20px]">
                 {[
                   { name: "Employee Handbook", date: "2024-01-15", type: "download" },
                   { name: "Code of Conduct", date: "2024-01-15", type: "download" },
