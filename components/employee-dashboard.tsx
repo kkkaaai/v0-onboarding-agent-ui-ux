@@ -81,12 +81,12 @@ export function EmployeeDashboard({ user, onLogout }: EmployeeDashboardProps) {
                 </div>
               </div>
 
-              <div className="mt-5 rounded-[18px] bg-muted/60 p-4">
-                <div className="flex items-center justify-between text-sm font-semibold text-foreground">
+              <div className="mt-5 rounded-[18px] bg-primary/10 p-4">
+                <div className="flex items-center justify-between text-sm font-semibold text-primary">
                   <span>Onboarding Progress</span>
-                  <span className="text-primary">29% · 2 of 7</span>
+                  <span>29% · 2 of 7</span>
                 </div>
-                <div className="mt-3 h-2 w-full rounded-full bg-muted">
+                <div className="mt-3 h-2 w-full rounded-full bg-primary/20">
                   <div className="h-2 rounded-full bg-primary" style={{ width: "29%" }} />
                 </div>
               </div>

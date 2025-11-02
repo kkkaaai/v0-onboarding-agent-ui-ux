@@ -221,7 +221,9 @@ export function TextChatbot({
           <div key={message.id} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
             <div
               className={`max-w-[70%] lg:max-w-[65%] xl:max-w-[60%] px-4 py-3 rounded-lg shadow-sm ${
-                message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted text-foreground"
+                message.role === "user"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-primary/10 text-primary"
               }`}
             >
               <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>

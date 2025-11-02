@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { StopCircle, Loader2 } from "lucide-react"
+import { StopCircle, Loader2, PlayCircle } from "lucide-react"
 
 interface AnamAvatarChatbotProps {
   employeeName?: string
@@ -309,6 +309,7 @@ Use the knowledge folder for detailed company information.`,
         await anamClient.stopStreaming()
         setStatus('stopped')
         setStatusText('Conversation stopped')
+        setAnamClient(null)
       } catch (error) {
         console.error('Error stopping:', error)
       }
@@ -359,6 +360,18 @@ Use the knowledge folder for detailed company information.`,
           className="absolute bottom-4 right-4 rounded-full bg-[#13544E] text-white shadow-lg hover:bg-[#0f3f3a]"
         >
           <StopCircle className="size-5" />
+        </Button>
+      )}
+
+      {status === 'stopped' && (
+        <Button
+          size="icon"
+          variant="ghost"
+          onClick={initAnamChatbot}
+          aria-label="Restart voice avatar"
+          className="absolute bottom-4 right-4 rounded-full bg-[#13544E] text-white shadow-lg hover:bg-[#0f3f3a]"
+        >
+          <PlayCircle className="size-5" />
         </Button>
       )}
     </Card>
