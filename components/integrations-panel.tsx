@@ -33,10 +33,10 @@ export function IntegrationsPanel() {
       icon: <Github className="w-5 h-5" />,
       status: "connected",
       details: [
-        "✓ Access granted to aurora-design-system",
-        "✓ Added to Frontend team",
-        "✓ SSH key configured",
-        "✓ Repository access active",
+        "Access granted to aurora-design-system",
+        "Added to Frontend team",
+        "SSH key configured",
+        "Repository access active",
       ],
     },
   ])
@@ -71,7 +71,7 @@ export function IntegrationsPanel() {
       case "connected":
         return "bg-primary/10 text-primary"
       case "pending":
-        return "bg-primary/5 text-primary"
+        return "bg-[#FEF3C7] text-[#B7791F]"
       case "failed":
         return "bg-destructive/10 text-destructive"
       default:
@@ -93,13 +93,13 @@ export function IntegrationsPanel() {
   }
 
   return (
-    <Card className="p-6 lg:p-7 space-y-6">
-      <div className="flex flex-col gap-2">
+    <Card className="p-6 lg:p-7 flex flex-col gap-[20px]">
+      <div className="flex flex-col gap-[10px]">
         <h3 className="text-xl font-bold text-foreground">Connected Services</h3>
         <p className="text-sm text-muted-foreground">Keep your onboarding tools in sync.</p>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-[10px] lg:grid-cols-2">
         {integrations.map((integration) => (
           <div
             key={integration.name}
@@ -111,7 +111,7 @@ export function IntegrationsPanel() {
                   {integration.icon}
                 </div>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-primary/70">Onboarding Integration</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-primary/70 whitespace-nowrap">Integration</p>
                   <h4 className="text-lg font-bold text-primary">{integration.name}</h4>
                 </div>
               </div>
